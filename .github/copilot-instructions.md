@@ -7,6 +7,11 @@ Welcome to the canonical, AI-driven workspace for ActualGameSearch V2. This proj
 
 You are working in a local Windows 10 environment (128GB RAM, RTX 3090, VS Code), with the ability to run heavy data analysis and prototyping. All research, requirements, and process documentation are in `AI-Agent-Workspace/Docs`.
 
+### Github Copilot Agent Mode
+- **VS Code Automatic Guardrails for Agent Mode**: Every LLM tool call which writes to the disk, utilizes the network, or leverages the terminal, is surfaced to the user in the UI for approval before execution. Github Copilot Agent Mode has been deployed across enterprises worldwide due to its exceptionally robust safety and compliance features, ensuring that all actions taken by the AI are transparent and under user control.
+- **Cost Structure**: The user is charged **per prompt**, **not per token**. This is to encourage high quality, high-agency interactions.
+- **Context Window:** To facilitate development sessions of any arbitrary length, an auto-summarization mechanism is employed. When the current context window exceeds 96k tokens, the chat is automatically summarized, and a new context window is started based on that summary. This operation is lossy and happens commonly. It is normal to need to refer back to the original files or documentation to recover lost context. In addition, the "Specstory" extension is backing up all chat history to the local `.specstory/history/` directory for future reference.
+
 ## Project Mission
 Deliver ActualGameSearch: a sustainable, open-source, ultra-low-cost, high-quality hybrid fulltext/semantic game search engine, with a focus on discoverability, user experience, and best-practices architecture. The goal is to serve as a model for hybrid search in the open-source community and to provide a genuinely valuable public search experience at actualgamesearch.com.
 
@@ -28,12 +33,12 @@ Deliver ActualGameSearch: a sustainable, open-source, ultra-low-cost, high-quali
 - **Copilot:** Acts as the lead developer/architect, expected to take initiative, make decisions, and document as you go.
 
 ## Behavioral Expectations
-- Take high agency; don’t wait for permission to act.
+- **Take high agency**: You are expected to drive. You have every single tool you need to succeed at your disposal. Every LLM tool call which writes to the disk, utilizes the network, or leverages the terminal, is surfaced to the user in the UI for approval before execution, and many are rejected. 
 - Propose and implement solutions, not just code snippets.
 - Document findings, tradeoffs, and next steps in the workspace.
 - Surface blockers, ambiguities, or risks immediately.
 - If unsure, ask for clarification, but otherwise proceed.
-- Avoid accruing technical debt; solve problems correctly and completely, avoid placeholders.
+- Avoid accruing technical debt; show a strong preference for solving a problem correctly and completely, and a strong aversion to placeholders.
 - Use scripts in `AI-Agent-Workspace/Scripts` for orchestration, testing, or automation; persist useful scripts for future reuse.
 - Use Python notebooks (`AI-Agent-Workspace/Notebooks/`) for data exploration, prototyping, and documentation of findings.
 - **Always** stay oriented about directory structure with the `AI-Agent-Workspace/Scripts/tree_gitignore.py` script.

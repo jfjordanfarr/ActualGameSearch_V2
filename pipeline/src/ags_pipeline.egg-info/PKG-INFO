@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: ags-pipeline
+Version: 0.1.0
+Summary: Offline ETL pipeline for ActualGameSearch
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=2.0
+Requires-Dist: numpy>=1.25
+Requires-Dist: requests>=2.31
+Requires-Dist: pyarrow>=14.0
+Requires-Dist: feather-format>=0.4.1
+
+# ETL Pipeline
+
+See notebooks/ and src/ags_pipeline/ for details.

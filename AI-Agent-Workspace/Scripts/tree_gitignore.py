@@ -67,6 +67,8 @@ def main():
     patterns = load_gitignore_patterns(gitignore_path)
     # Add default git ignores
     patterns.extend(['.git'])
+    # Ignore .venv/ and __pycache__/ by default
+    patterns.extend(['.venv/', '__pycache__/'])
     # Ensure patterns containing '/' are treated correctly relative to the root
     spec = pathspec.PathSpec.from_lines(pathspec.patterns.GitWildMatchPattern, patterns)
 
