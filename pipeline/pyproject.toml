@@ -1,0 +1,4 @@
+[project]
+name = "ags-pipeline"
+version = "0.1.0"
+description = "Offline ETL pipeline for ActualGameSearch"

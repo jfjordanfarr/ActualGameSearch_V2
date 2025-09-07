@@ -1,0 +1,1 @@
+-- D1 SQL schema (see docs/data-schema.md)
