@@ -9427,7 +9427,7 @@ GitHub Copilot
 
 ---
 
-_**User (2025-09-08 00:55Z)**_
+_**User (2025-09-08 01:02Z)**_
 
 Proceed to commit (modify gitignore to ensure we are not committing raw data as you have described)
 
@@ -9439,7 +9439,87 @@ I'll update the root .gitignore to exclude dataset artifacts and backups, then s
 ```
 
 ```
+Committed. Here’s what I did and why:
 
+Actions
+- Updated .gitignore to avoid committing raw data and transients:
+  - Ignored pipeline/data CSV/Feather/JSON artifacts, backups (*.bak.*), .joined.* files, and SQLite DBs.
+- Added a CI workflow: `pipeline-ci.yml`
+  - Installs dev deps (including pyarrow), sets PYTHONPATH, runs pipeline tests on push/PR.
+- Committed the code changes:
+  - Loader, scripts, tests, runner, model fixes, and README note.
+  - Commit message: feat(pipeline): join price min/max into ETL outputs; add loader, tests, runner, and CI; safe backups and docs; expand currency minor-units mapping
+
+State
+- Tests pass locally (including the new ETL join test).
+- ETL runner verified: performs in-place join with backups and loads SQLite.
+- CI will run on the next push/PR.
+
+Optional next
+- Add a schema/assertion in `run_etl.py` to fail if price_min/price_max aren’t present post-join.
+- Add a short data-schema section documenting the price fields returned.
+
+---
+
+_**User (2025-09-08 01:07Z)**_
+
+github actions reports that the `Run tests` phase of the new CI/CD pipeline failed.
+
+```
+Run pytest -q pipeline/tests
+  pytest -q pipeline/tests
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+    PYTHONPATH: pipeline/src
+
+==================================== ERRORS ====================================
+________________ ERROR collecting tests/test_etl_join_minmax.py ________________
+ImportError while importing test module '/home/runner/work/ActualGameSearch_V2/ActualGameSearch_V2/pipeline/tests/test_etl_join_minmax.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pipeline/tests/test_etl_join_minmax.py:5: in <module>
+    from pipeline.scripts import run_etl as run
+E   ModuleNotFoundError: No module named 'pipeline'
+=========================== short test summary info ============================
+ERROR pipeline/tests/test_etl_join_minmax.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.58s
+Error: Process completed with exit code 2.
+```
+
+---
+
+_**Assistant**_
+
+
+```
+
+```
+Thanks for the error details—CI failed because PYTHONPATH only included ``, so `from pipeline.scripts import run_etl` couldn’t resolve the `` package.
+
+Fix applied
+- Updated the CI workflow to include both `` and the `` directory on PYTHONPATH:
+  - `pipeline-ci.yml`
+  - PYTHONPATH: pipeline/src:pipeline
+
+Why this works
+- Tests import two module roots:
+  - Package modules under `ags_pipeline` from ``.
+  - The `pipeline.scripts` package from `` (so `from pipeline.scripts import run_etl` resolves).
+
+What to expect
+- The next CI run should collect and run tests successfully.
+
+If anything else pops up in CI (e.g., missing system libs for pyarrow), we can pin versions or adjust requirements as needed.
 
 ---
 

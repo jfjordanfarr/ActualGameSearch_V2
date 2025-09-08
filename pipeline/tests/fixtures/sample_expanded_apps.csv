@@ -1,0 +1,4 @@
+steam_appid,name,type,is_free,detailed_description,short_description,header_image
+12345,"Test Game 1",game,false,"A detailed description of test game 1","Short desc 1","http://example.com/image1.jpg"
+67890,"Test Game 2",game,true,"A detailed description of test game 2","Short desc 2","http://example.com/image2.jpg"
+11111,"Test DLC",dlc,false,"A detailed description of test DLC","Short desc DLC","http://example.com/image3.jpg"
