@@ -1,0 +1,7 @@
+pytest>=7.0
+pytest-cov
+
+# Optional testing/data deps
+pandas>=2.0
+numpy>=1.25
+pyarrow>=14.0

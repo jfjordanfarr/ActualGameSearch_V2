@@ -5,3 +5,12 @@ __pycache__/
 *.pyc
 .vscode/
 .devcontainer/
+
+# Pipeline data artifacts and backups
+pipeline/data/*.csv
+pipeline/data/*.feather
+pipeline/data/*.json
+!pipeline/data/.gitkeep
+pipeline/data/*.bak.*
+pipeline/data/*.joined.*
+pipeline/data/*.db
