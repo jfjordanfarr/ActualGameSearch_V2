@@ -25,6 +25,6 @@ jobs:
 
       - name: Run tests
         env:
-          PYTHONPATH: pipeline/src
+          PYTHONPATH: pipeline/src:pipeline
         run: |
           pytest -q pipeline/tests
