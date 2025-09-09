@@ -1,4 +1,22 @@
 {
     "name": "ags-search-api",
-    "private": true
+    "private": true,
+    "version": "1.0.0",
+    "description": "ActualGameSearch V2 - Hybrid Search API (FTS5 + Vector Fusion)",
+    "main": "src/index.ts",
+    "scripts": {
+        "dev": "wrangler dev",
+        "deploy": "wrangler deploy",
+        "test": "vitest",
+        "test:watch": "vitest --watch",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@cloudflare/workers-types": "^4.20240909.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0",
+        "vitest": "^1.0.0",
+        "wrangler": "^3.0.0"
+    }
 }

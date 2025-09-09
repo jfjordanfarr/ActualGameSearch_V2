@@ -1,1 +1,36 @@
-# Worker-specific bindings (D1, Vectorize, R2, Secrets, AI)
+# ActualGameSearch V2 - Hybrid Search API Worker Configuration
+name = "ags-search-api"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Development
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+# Production  
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+# Cloudflare Services - Local D1 for testing
+[[d1_databases]]
+binding = "DB"
+database_name = "ags-local-test"
+database_id = "c5c72b7a-752e-4ec9-b588-b429e311fdb7"
+
+# [[vectorize]]
+# binding = "VECTORIZE" 
+# index_name = "ags-vectors"
+
+# [[r2_buckets]]
+# binding = "R2"
+# bucket_name = "ags-data"
+
+# Limits & Performance
+[limits]
+cpu_ms = 30000
+memory_mb = 128
+
+# Local Development Database (Phase 2 SQLite for testing)
+[vars]
+PHASE2_DB_PATH = "../../pipeline/data/phase2_hybrid_search.db"
