@@ -14,3 +14,4 @@ pipeline/data/*.json
 pipeline/data/*.bak.*
 pipeline/data/*.joined.*
 pipeline/data/*.db
+temp-scripts/phase2_export.sql
